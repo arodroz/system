@@ -9,27 +9,28 @@ def get_number(length):
     return int(value)
 
 
+def populate(filename):
+    with open(filename) as f:
+        buf = f.readlines()
+    dict = {}
+    for line in buf:
+        a, b = line.split(',')
+        dict[int(a)] = b[:-1]
+    return dict
+
+
+def make_password(size, adjectives, nouns):
+    random.seed()
+    password = ''
+    for i in range(size):
+        password += adjectives[get_number(4)] + '\x20'
+        password += nouns[get_number(5)] + '\x20'
+    return password[:-1]
+
+
 if __name__ == '__main__':
 
-    adjectives = {}
-    with open('adjectives.csv') as f:
-        buf = f.readlines()
-    for line in buf:
-        a, b = line.split(',')
-        adjectives[int(a)] = b[:-1]
+    adjectives = populate('adjectives.csv')
+    nouns = populate('nouns.csv')
 
-    nouns = {}
-    with open('nouns.csv') as f:
-        buf = f.readlines()
-    for line in buf:
-        a, b = line.split(',')
-        nouns[int(a)] = b[:-1]
-
-    random.seed()
-
-    word_1 = adjectives[get_number(4)]
-    word_2 = nouns[get_number(5)]
-    word_3 = adjectives[get_number(4)]
-    word_4 = nouns[get_number(5)]
-
-    print(f"\n{word_1} {word_2} {word_3} {word_4}\n")
+    print(f"\n{make_password(2, adjectives, nouns)}\n")
