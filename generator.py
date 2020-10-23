@@ -3,7 +3,7 @@ import random
 
 def get_number(length):
     value = ''
-    for i in range(length):
+    for _ in range(length):
         a = random.randint(1, 6)
         value += str(a)
     return int(value)
@@ -22,7 +22,7 @@ def populate(filename):
 def make_password(size, adjectives, nouns):
     random.seed()
     password = ''
-    for i in range(size):
+    for _ in range(size):
         password += adjectives[get_number(4)] + '\x20'
         password += nouns[get_number(5)] + '\x20'
     return password[:-1]
