@@ -21,7 +21,8 @@ def populate(filename):
 
 
 def make_password(size, adjectives, nouns, language='en'):
-    translator = Translator()
+    if language != 'en':
+        translator = Translator()
     random.seed()
     password = ''
     for _ in range(size):
