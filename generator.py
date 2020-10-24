@@ -2,12 +2,12 @@ import random
 from googletrans import Translator
 
 
-def get_number(length):
-    value = ''
-    for _ in range(length):
-        a = random.randint(1, 6)
-        value += str(a)
-    return int(value)
+def get_number(size):
+    number = ''
+    for _ in range(size):
+        digit = random.randint(1, 6)
+        number += str(digit)
+    return int(number)
 
 
 def populate(filename):
@@ -15,8 +15,8 @@ def populate(filename):
         buf = f.readlines()
     dict = {}
     for line in buf:
-        a, b = line.split(',')
-        dict[int(a)] = b[:-1]
+        key, word = line.split(',')
+        dict[int(key)] = word[:-1]
     return dict
 
 
