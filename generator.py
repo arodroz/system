@@ -1,4 +1,5 @@
 import random
+from googletrans import Translator
 
 
 def get_number(length):
@@ -19,12 +20,21 @@ def populate(filename):
     return dict
 
 
-def make_password(size, adjectives, nouns):
+def make_password(size, adjectives, nouns, language='en'):
+    translator = Translator()
     random.seed()
     password = ''
     for _ in range(size):
-        password += adjectives[get_number(4)] + '\x20'
-        password += nouns[get_number(5)] + '\x20'
+        word = adjectives[get_number(4)]
+        if language != 'en':
+            word = translator.translate(word, src='en', dest=language)
+            word = word.text
+        password += word + '_'
+        word = nouns[get_number(5)]
+        if language != 'en':
+            word = translator.translate(word, src='en', dest=language)
+            word = word.text
+        password += word + '_'
     return password[:-1]
 
 
@@ -33,4 +43,6 @@ if __name__ == '__main__':
     adjectives = populate('adjectives.csv')
     nouns = populate('nouns.csv')
 
-    print(f"\n{make_password(2, adjectives, nouns)}\n")
+    password = make_password(2, adjectives, nouns, 'fr')
+
+    print(f"\n{password}\n")
