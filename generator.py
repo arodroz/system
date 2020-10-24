@@ -21,6 +21,17 @@ def populate(filename):
 
 
 def make_password(size, adjectives, nouns, language='en'):
+    """Generate password
+
+    Args:
+        size (int): Number of adjective/noun pairs
+        adjectives (dictionary): English adjectives table
+        nouns (dictionary): English nouns table
+        language (str, optional): Language in which to translate the words. Defaults to 'en'.
+
+    Returns:
+        string: Generated password
+    """
     translate = language != 'en'
     if translate:
         translator = Translator()
